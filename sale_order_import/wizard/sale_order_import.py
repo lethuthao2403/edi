@@ -467,8 +467,8 @@ class SaleOrderImport(models.TransientModel):
                 "company_id": company_id,
             }
         )
-        if price_source == "order":
-            vals["price_unit"] = import_line["price_unit"]  # TODO : fix
+        if price_source == "order" and 'price_unit' in import_line.items():
+            vals["price_unit"] = import_line["price_unit"]
         elif price_source == "pricelist":
             # product_id_change is played in the inherit of create()
             # of sale.order.line cf odoo/addons/sale/models/sale.py
